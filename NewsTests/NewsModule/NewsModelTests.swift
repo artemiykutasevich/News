@@ -11,7 +11,9 @@ import XCTest
 class NewsModelTests: XCTestCase {
     
     func testModelContainsController() {
-        let model = NewsModel()
-        XCTAssertNotNil(model.controller, "controller is nil")
+        let view = NewsViewController()
+        view.createModule()
+        
+        XCTAssertNotNil(view.controller?.model?.controller, "controller is nil")
     }
 }

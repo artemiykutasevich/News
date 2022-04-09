@@ -12,6 +12,8 @@ class NewsViewControllerTests: XCTestCase {
     
     func testViewContainsController() {
         let view = NewsViewController()
+        view.createModule()
+        
         XCTAssertNotNil(view.controller, "controller is nil")
     }
 }
