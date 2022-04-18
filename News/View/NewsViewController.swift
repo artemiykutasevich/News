@@ -15,6 +15,7 @@ class NewsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         createModule()
+        startObserve()
         
         tableView = UITableView(frame: .zero)
         self.view.addSubview(tableView)
@@ -41,18 +42,25 @@ class NewsViewController: UIViewController {
             $0.bottom.equalTo(view.snp.bottom)
         }
     }
+    
+    func startObserve() {
+        NotificationCenter.default.addObserver(self, selector: #selector(tableReload), name: Notification.Name("updateTable"), object: nil)
+    }
+    
+    @objc func tableReload() {
+        self.tableView.reloadData()
+    }
 }
 
 extension NewsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return controller?.model?.newsline.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "NewsTableViewCell", for: indexPath) as! NewsTableViewCell
         cell.pictureImageView.image = UIImage(systemName: "mic")!
-        cell.titleLabel.text = "Title"
-        cell.bodyLabel.text = "Body"
+        cell.setUpCell(from: (controller?.getArticle(with: indexPath))!)
         return cell
     }
 }

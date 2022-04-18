@@ -54,4 +54,9 @@ class NewsTableViewCell: UITableViewCell {
             $0.bottom.equalToSuperview().inset(16)
         }
     }
+    
+    func setUpCell(from: Article) {
+        titleLabel.text = from.title
+        bodyLabel.text = from.articleDescription
+    }
 }

@@ -9,5 +9,5 @@ import Foundation
 
 class NewsModel {
     var controller: NewsController?
-    var newsline: News?
+    var newsline = [Article]()
 }

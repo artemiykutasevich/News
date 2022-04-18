@@ -8,13 +8,25 @@
 import XCTest
 @testable import News
 
-class NewsModule: XCTestCase {
+class NewsModuleTests: XCTestCase {
+    
+    var view: NewsViewController!
+    var model: NewsModel!
+    var controller: NewsController!
+    
+    override func setUp() {
+        view = NewsViewController()
+        model = NewsModel()
+        controller = NewsController(view: view, model: model)
+    }
+    
+    override func tearDown() {
+        view = nil
+        model = nil
+        controller = nil
+    }
     
     func testModuleCreated() {
-        let view = NewsViewController()
-        let model = NewsModel()
-        let controller = NewsController(view: view, model: model)
-        
         XCTAssertNotNil(view.controller, "view.controller is nil")
         XCTAssertNotNil(model.controller, "model.controller is nil")
         

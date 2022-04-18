@@ -10,10 +10,23 @@ import XCTest
 
 class NewsViewControllerTests: XCTestCase {
     
+    var view: NewsViewController!
+    
+    override func setUp() {
+        view = NewsViewController()
+    }
+    
+    override func tearDown() {
+        view = nil
+    }
+    
     func testViewContainsController() {
-        let view = NewsViewController()
         view.createModule()
-        
         XCTAssertNotNil(view.controller, "controller is nil")
+    }
+    
+    func testTableViewNotNilWhenViewIsLoaded() {
+        view.loadViewIfNeeded()
+        XCTAssertNotNil(view.tableView, "tableView is nil")
     }
 }
