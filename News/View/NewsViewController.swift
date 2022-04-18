@@ -59,7 +59,6 @@ extension NewsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "NewsTableViewCell", for: indexPath) as! NewsTableViewCell
-        cell.pictureImageView.image = UIImage(systemName: "mic")!
         cell.setUpCell(from: (controller?.getArticle(with: indexPath))!)
         return cell
     }

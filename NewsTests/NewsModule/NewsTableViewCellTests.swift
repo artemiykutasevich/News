@@ -56,4 +56,9 @@ class NewsTableViewCellTests: XCTestCase {
         cell.setUpCell(from: article)
         XCTAssertEqual(cell.bodyLabel.text, "new body")
     }
+    
+    func testSetUpCellImage() {
+        cell.setUpCell(from: article)
+        XCTAssertNotNil(cell.pictureImageView.image)
+    }
 }

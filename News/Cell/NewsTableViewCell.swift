@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import AlamofireImage
 
 class NewsTableViewCell: UITableViewCell {
     static let identifier = "NewsTableViewCell"
@@ -24,6 +25,12 @@ class NewsTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        pictureImageView.image = UIImage(named: "placeholder")!
+        titleLabel.text = "Title"
+        bodyLabel.text = "Body"
+    }
+    
     func config() {
         pictureImageView = UIImageView()
         self.contentView.addSubview(pictureImageView)
@@ -36,6 +43,9 @@ class NewsTableViewCell: UITableViewCell {
         
         titleLabel = UILabel()
         titleLabel.textAlignment = .center
+        titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        titleLabel.lineBreakMode = .byTruncatingTail
+        titleLabel.numberOfLines = 1
         self.contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(16)
@@ -46,6 +56,9 @@ class NewsTableViewCell: UITableViewCell {
         
         bodyLabel = UILabel()
         bodyLabel.textAlignment = .center
+        bodyLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        bodyLabel.lineBreakMode = .byTruncatingTail
+        bodyLabel.numberOfLines = 3
         self.contentView.addSubview(bodyLabel)
         bodyLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(16)
@@ -58,5 +71,9 @@ class NewsTableViewCell: UITableViewCell {
     func setUpCell(from: Article) {
         titleLabel.text = from.title
         bodyLabel.text = from.articleDescription
+        guard let urlToImage = from.urlToImage else {
+            return pictureImageView.image = UIImage(named: "placeholder")!
+        }
+        pictureImageView.af.setImage(withURL: URL(string: urlToImage)!)
     }
 }
