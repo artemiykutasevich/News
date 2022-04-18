@@ -7,6 +7,8 @@ target 'News' do
 
   # Pods for News
   pod 'SnapKit'
+  pod 'Alamofire'
+  pod 'AlamofireImage'
 
   target 'NewsTests' do
     inherit! :search_paths
